@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/opyrusdev/Projects/Test/Test.csproj",
-      "projectName": "Test",
-      "projectPath": "/home/opyrusdev/Projects/Test/Test.csproj",
+      "projectUniqueName": "/home/opyrusdev/Projects/Automaton/Automaton.csproj",
+      "projectName": "Automaton",
+      "projectPath": "/home/opyrusdev/Projects/Automaton/Automaton.csproj",
       "packagesPath": "/home/opyrusdev/.nuget/packages/",
-      "outputPath": "/home/opyrusdev/Projects/Test/obj/",
+      "outputPath": "/home/opyrusdev/Projects/Automaton/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/opyrusdev/.nuget/NuGet/NuGet.Config"

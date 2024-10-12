@@ -1,4 +1,4 @@
-namespace Test;
+namespace Automaton;
 
 public class State(int id, bool isEntry = false, bool isExit = false)
 {

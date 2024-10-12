@@ -1,4 +1,4 @@
-namespace Test;
+namespace Automaton;
 
 public class Automate
 {
