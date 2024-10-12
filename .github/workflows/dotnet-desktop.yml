@@ -57,7 +57,8 @@ jobs:
 
     env:
       Solution_Name: Automaton.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
-      Test_Project_Path: Test.csproj              # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj
+      Test_Project_Path: Automaton.csproj              # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj
+      Wap_Project_Directory: ./Automaton-Package
 
     steps:
     - name: Checkout
