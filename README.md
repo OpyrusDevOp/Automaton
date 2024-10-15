@@ -21,11 +21,7 @@ The **Automaton** project aims to develop an automaton that determines if a word
 
 ## Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/Automaton.git
-   cd Automaton
-   ```
+1. Clone the repository
 
 2. Open the project in your preferred integrated development environment (IDE).
 
