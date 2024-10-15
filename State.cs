@@ -35,6 +35,7 @@ public class State(int id, bool isEntry = false, bool isExit = false)
 
 public record IntersecState
 {
+    public int Id;
     public required State AutoAState { get; set; }
     public required State AutoBState { get; set; }
     public required bool IsEntry;

@@ -1,0 +1,15 @@
+/home/opyrusdev/Projects/Automaton/bin/Debug/net8.0/Automaton
+/home/opyrusdev/Projects/Automaton/bin/Debug/net8.0/Automaton.deps.json
+/home/opyrusdev/Projects/Automaton/bin/Debug/net8.0/Automaton.runtimeconfig.json
+/home/opyrusdev/Projects/Automaton/bin/Debug/net8.0/Automaton.dll
+/home/opyrusdev/Projects/Automaton/bin/Debug/net8.0/Automaton.pdb
+/home/opyrusdev/Projects/Automaton/obj/Debug/net8.0/Automaton.GeneratedMSBuildEditorConfig.editorconfig
+/home/opyrusdev/Projects/Automaton/obj/Debug/net8.0/Automaton.AssemblyInfoInputs.cache
+/home/opyrusdev/Projects/Automaton/obj/Debug/net8.0/Automaton.AssemblyInfo.cs
+/home/opyrusdev/Projects/Automaton/obj/Debug/net8.0/Automaton.csproj.CoreCompileInputs.cache
+/home/opyrusdev/Projects/Automaton/obj/Debug/net8.0/Automaton.sourcelink.json
+/home/opyrusdev/Projects/Automaton/obj/Debug/net8.0/Automaton.dll
+/home/opyrusdev/Projects/Automaton/obj/Debug/net8.0/refint/Automaton.dll
+/home/opyrusdev/Projects/Automaton/obj/Debug/net8.0/Automaton.pdb
+/home/opyrusdev/Projects/Automaton/obj/Debug/net8.0/Automaton.genruntimeconfig.cache
+/home/opyrusdev/Projects/Automaton/obj/Debug/net8.0/ref/Automaton.dll

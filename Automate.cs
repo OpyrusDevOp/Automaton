@@ -6,59 +6,53 @@ public class Automate
 
     public Automate(State[] states, Transition[] transitions)
         {
-            States = new Dictionary<int, State>();
-            EntryStates = new Dictionary<int, State>();
-            ExitStates = new Dictionary<int, State>();
-            Alphabet = [];
-            Transitions = [];
+            _states = new Dictionary<int, State>();
+            _entryStates = new Dictionary<int, State>();
+            _exitStates = new Dictionary<int, State>();
+            _alphabet = [];
+            _transitions = [];
     
             foreach (var state in states)
             {
-                States.Add(state.Id, state);
+                _states.Add(state.Id, state);
                 switch (state.IsEntry)
                 {
                     case true when state.IsExit:
                         throw new Exception();
                     case true:
-                        EntryStates.Add(state.Id, state);
+                        _entryStates.Add(state.Id, state);
                         break;
                 }
     
                 if (state.IsExit)
-                    ExitStates.Add(state.Id, state);
+                    _exitStates.Add(state.Id, state);
             }
     
             foreach (var transition in transitions)
             {
-                if (!Alphabet.Contains(transition.Value))
-                    Alphabet.Add(transition.Value);
+                if (!_alphabet.Contains(transition.Value))
+                    _alphabet.Add(transition.Value);
     
-                Transitions.Add(transition);
+                _transitions.Add(transition);
             }
         }
     
     public Automate(State[] states, Transition[] transitions, char[] alphabet)
         {
-            States = new Dictionary<int, State>();
-            EntryStates = new Dictionary<int, State>();
-            ExitStates = new Dictionary<int, State>();
-            Alphabet = [..alphabet];
-            Transitions = [..transitions];
+            _states = new Dictionary<int, State>();
+            _entryStates = new Dictionary<int, State>();
+            _exitStates = new Dictionary<int, State>();
+            _alphabet = [..alphabet];
+            _transitions = [..transitions];
     
             foreach (var state in states)
             {
-                States.Add(state.Id, state);
-                switch (state.IsEntry)
-                {
-                    case true when state.IsExit:
-                        throw new Exception();
-                    case true:
-                        EntryStates.Add(state.Id, state);
-                        break;
-                }
+                _states.Add(state.Id, state);
+                if(state.IsEntry)
+                    _entryStates.Add(state.Id, state);
     
                 if (state.IsExit)
-                    ExitStates.Add(state.Id, state);
+                    _exitStates.Add(state.Id, state);
             }
         }
 
@@ -66,11 +60,11 @@ public class Automate
 
     #region Fields
 
-    private readonly Dictionary<int, State> States;
-    private readonly Dictionary<int, State> EntryStates;
-    private readonly Dictionary<int, State> ExitStates;
-    private readonly List<Transition> Transitions;
-    private readonly List<char> Alphabet;
+    private readonly Dictionary<int, State> _states;
+    private readonly Dictionary<int, State> _entryStates;
+    private readonly Dictionary<int, State> _exitStates;
+    private readonly List<Transition> _transitions;
+    private readonly List<char> _alphabet;
 
     #endregion
     
@@ -78,20 +72,13 @@ public class Automate
 
         public void Display_Alphabet()
         {
-            Console.Write("Alphabet : { ");
-    
-            foreach (var letter in Alphabet)
-            {
-                Console.Write($"{letter}, ");
-            }
-    
-            Console.WriteLine("}");
+            Console.WriteLine($"Alphabet: {{ {string.Join(", ", _alphabet)} }}");
         }
     
-        public void Display_Transition()
+        public void  Display_Transition()
         {
             Console.WriteLine("Transitions : ");
-            foreach (var transition in Transitions)
+            foreach (var transition in _transitions)
             {
                 Console.WriteLine(
                     $"({transition.InitialState.Id}) --{transition.Value}--> ({transition.LastState.Id})"
@@ -101,14 +88,14 @@ public class Automate
     
         public int? Out_State(int initialState, char value)
         {
-            var t = Transitions.FirstOrDefault(t => t.InitialState.Id == initialState && t.Value == value);
+            var t = _transitions.FirstOrDefault(t => t.InitialState.Id == initialState && t.Value == value);
     
             return t?.LastState.Id;
         }
 
         private int[]? Out_States(int[] initialState, char value)
         {
-            var transitions = Transitions.FindAll(t =>
+            var transitions = _transitions.FindAll(t =>
                 initialState.Contains(t.InitialState.Id) && t.Value == value
             );
     
@@ -129,7 +116,7 @@ public class Automate
 
         private bool In_Alphabet(string word)
         {
-            return word.All(character => Alphabet.Contains(character));
+            return word.All(character => _alphabet.Contains(character));
         }
     
         public bool Is_Recognized(string word)
@@ -137,7 +124,7 @@ public class Automate
             if (!In_Alphabet(word))
                 return false;
     
-            int[]? currentPosition = EntryStates.Keys.ToArray();
+            int[]? currentPosition = _entryStates.Keys.ToArray();
     
             foreach (var character in word)
             {
@@ -149,7 +136,7 @@ public class Automate
     
             foreach (var pos in currentPosition)
             {
-                if (States[pos].IsExit)
+                if (_states[pos].IsExit)
                     return true;
             }
     
@@ -165,15 +152,15 @@ public class Automate
         var intersectingStates = new Dictionary<int, IntersecState>();
         var id = 0;
         
-        var alphabet = a.Alphabet.Intersect(b.Alphabet).ToArray();
+        var alphabet = a._alphabet.Intersect(b._alphabet).ToArray();
         var transitions = new List<Transition>();
         var states = new List<State>();
         
         
-        var aIntersetions = a.Transitions.FindAll(t => alphabet.Contains(t.Value));
-        var bIntersetions = b.Transitions.FindAll(t => alphabet.Contains(t.Value));
+        var aIntersetions = a._transitions.FindAll(t => alphabet.Contains(t.Value));
+        var bIntersetions = b._transitions.FindAll(t => alphabet.Contains(t.Value));
         
-        foreach (var state in from aState in a.States.Values from bState in b.States.Values select new IntersecState
+        foreach (var state in from aState in a._states.Values from bState in b._states.Values select new IntersecState
                  {
                      AutoAState = aState,
                      AutoBState = bState,
@@ -235,6 +222,65 @@ public class Automate
         }
         return new Automate(states.ToArray(), transitions.ToArray(), alphabet);
     }
+    
+    
+    public static Automate Union(Automate a, Automate b)
+{
+    var intersectingStates = new Dictionary<int, IntersecState>();
+    var id = 0;
+    var alphabet = a._alphabet.Union(b._alphabet).ToArray();
+    var transitions = new HashSet<Transition>();
+    var states = new List<State>();
+
+    foreach (var state in from aState in a._states.Values from bState in b._states.Values select new IntersecState
+    {
+        Id = id,
+        AutoAState = aState,
+        AutoBState = bState,
+        IsEntry = aState.IsEntry || bState.IsEntry,
+        IsExit = aState.IsExit || bState.IsExit
+    })
+    {
+        intersectingStates.Add(id, state);
+        states.Add(State.FromIntersecState(state, id));
+        id++;
+    }
+
+    void AddTransition(IntersecState currentState, IntersecState comparedState)
+    {
+        var initialState = states.First(s => s.Id == currentState.Id);
+        var lastState = states.First(s => s.Id == comparedState.Id);
+
+        if (currentState.AutoAState.Id != comparedState.AutoAState.Id)
+        {
+            var aTransition = a._transitions.FirstOrDefault(t => t.InitialState == currentState.AutoAState && t.LastState == comparedState.AutoAState);
+            if (aTransition != null)
+            {
+                transitions.Add(new Transition(initialState, lastState, aTransition.Value));
+            }
+        }
+
+        if (currentState.AutoBState.Id != comparedState.AutoBState.Id)
+        {
+            var bTransition = b._transitions.FirstOrDefault(t => t.InitialState == currentState.AutoBState && t.LastState == comparedState.AutoBState);
+            if (bTransition != null)
+            {
+                transitions.Add(new Transition(initialState, lastState, bTransition.Value));
+            }
+        }
+    }
+
+    for (var i = 0; i < intersectingStates.Count - 1; i++)
+    {
+        for (var j = i + 1; j < intersectingStates.Count; j++)
+        {
+            AddTransition(intersectingStates[i], intersectingStates[j]);
+        }
+    }
+
+    return new Automate(states.ToArray(), transitions.ToArray(), alphabet);
+}
+
     
     #endregion
     
