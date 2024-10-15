@@ -2,48 +2,43 @@
 
 ## Description
 
-Le projet **Automaton** vise à développer un automate qui reconnaît si un mot appartient à un langage donné. Il inclut également la construction d'un automate qui reconnaît l'intersection de deux langages à partir de deux automates distincts.
+The **Automaton** project aims to develop an automaton that determines if a word belongs to a given language. It also includes the construction of an automaton that recognizes the intersection of two languages based on two distinct automatons.
 
-## Fonctionnalités
+## Features
 
-- [x] **Affichage des états et des transitions** : Présente les états et les transitions de l'automate.
-- [x] **Reconnaissance de langage** : Vérifie si un mot appartient à un langage défini par un automate.
-- [x] **Produit d'automate** : Génère un automate qui reconnaît l'intersection de deux langages provenant de deux automates distincts.
+- [x] **State and Transition Display**: Displays the states and transitions of the automaton.
+- [x] **Language Recognition**: Checks if a word belongs to a language defined by an automaton.
+- [x] **Automaton Product**: Generates an automaton that recognizes the intersection of two languages from two distinct automatons.
 
-### Futures fonctionnalités
+### Future Features
 
-- [ ] **Union de langages** : Implémenter la création d'un automate qui reconnaît l'union de deux langages.
-- [ ] **Compléter un automate** : Ajouter un état puits si nécessaire pour compléter l'automate.
-- [ ] **Complémentaire d'un langage** : À partir d'un automate déterministe, retourner un automate reconnaissant le complémentaire du langage.
-- [ ] **Conversion non déterministe à déterministe** : Prendre un automate non déterministe et retourner un automate déterministe reconnaissant le même langage.
-- [ ] **Vérification de la vacuité** : Déterminer si le langage reconnu par un automate est vide.
-- [ ] **Vérification de l'infinité** : Déterminer si le langage reconnu par un automate est infini.
-
+- [ ] **Union of Languages**: Implement the creation of an automaton that recognizes the union of two languages.
+- [ ] **Complete an Automaton**: Add a sink state if necessary to complete the automaton.
+- [ ] **Complement of a Language**: From a deterministic automaton, return an automaton that recognizes the complement of the language.
+- [ ] **Non-Deterministic to Deterministic Conversion**: Convert a non-deterministic automaton into a deterministic one that recognizes the same language.
+- [ ] **Check for Emptiness**: Determine if the language recognized by an automaton is empty.
+- [ ] **Check for Infinity**: Determine if the language recognized by an automaton is infinite.
 
 ## Installation
 
-1. Clonez le repository :
-   ```bash
-   git clone https://github.com/votre-utilisateur/Automaton.git
-   cd Automaton
-   ```
+1. Clone the repository
 
-2. Ouvrez le projet dans votre environnement de développement intégré (IDE) préféré.
+2. Open the project in your preferred integrated development environment (IDE).
 
-3. Compilez et exécutez le projet.
+3. Build and run the project.
 
-## Utilisation
+## Usage
 
-### 1. Créer un automate
+### 1. Create an Automaton
 
-Pour créer un automate, définissez ses états et ses transitions. Par exemple :
+To create an automaton, define its states and transitions. For example:
 
 ```csharp
 State[] states =
 {
-    new State(1, true),  // État d'entrée
+    new State(1, true),  // Entry state
     new State(2),
-    new State(3, false, true),  // État de sortie
+    new State(3, false, true),  // Exit state
 };
 
 Transition[] transitions =
@@ -55,19 +50,19 @@ Transition[] transitions =
 Automate automate = new Automate(states, transitions);
 ```
 
-### 2. Vérifier un mot
+### 2. Check a Word
 
-Utilisez la méthode `Is_Recognized` pour vérifier si un mot appartient à l'automate :
+Use the `Is_Recognized` method to check if a word belongs to the automaton:
 
 ```csharp
 var word = "ab";
 bool recognized = automate.Is_Recognized(word);
-Console.WriteLine(recognized ? $"{word} appartient au langage" : $"{word} n'appartient pas au langage");
+Console.WriteLine(recognized ? $"{word} belongs to the language" : $"{word} does not belong to the language");
 ```
 
-### 3. Intersection de deux automates
+### 3. Intersection of Two Automatons
 
-Pour créer un automate qui reconnaît l'intersection de deux langages, utilisez la méthode `Intersection` :
+To create an automaton that recognizes the intersection of two languages, use the `Intersection` method:
 
 ```csharp
 Automate intersectedAutomate = Automate.Intersection(automateA, automateB);
@@ -75,17 +70,13 @@ Automate intersectedAutomate = Automate.Intersection(automateA, automateB);
 
 ## Contribution
 
-Les contributions sont les bienvenues ! Veuillez soumettre une demande de tirage (pull request) ou ouvrir une issue pour discuter des améliorations.
+Contributions are welcome! Please submit a pull request or open an issue to discuss improvements.
 
 ## License
 
-Ce projet est sous licence MIT. Consultez le fichier LICENSE pour plus de détails.
+This project is licensed under the MIT License. See the LICENSE file for more details.
 
 ## Acknowledgments
 
-- [Automates et Langages](https://fr.wikipedia.org/wiki/Automate_fini) - Source d'inspiration pour la théorie des automates.
-- Merci à tous les contributeurs qui ont aidé à faire avancer ce projet !
-
-### Personnalisation
-
-N'hésitez pas à personnaliser davantage le README en fonction de votre projet, en ajoutant des informations spécifiques, des exemples supplémentaires, ou des instructions particulières si nécessaire. Si vous avez besoin d'autres ajustements ou sections, faites-le moi savoir !
+- [Automata and Languages](https://en.wikipedia.org/wiki/Finite-state_machine) - Inspiration source for automaton theory.
+- Thanks to all the contributors who helped move this project forward!
