@@ -9,10 +9,10 @@ The **Automaton** project aims to develop an automaton that determines if a word
 - [x] **State and Transition Display**: Displays the states and transitions of the automaton.
 - [x] **Language Recognition**: Checks if a word belongs to a language defined by an automaton.
 - [x] **Automaton Product**: Generates an automaton that recognizes the intersection of two languages from two distinct automatons.
+- [x] **Union of Languages**: Implement the creation of an automaton that recognizes the union of two languages.
 
 ### Future Features
 
-- [ ] **Union of Languages**: Implement the creation of an automaton that recognizes the union of two languages.
 - [ ] **Complete an Automaton**: Add a sink state if necessary to complete the automaton.
 - [ ] **Complement of a Language**: From a deterministic automaton, return an automaton that recognizes the complement of the language.
 - [ ] **Non-Deterministic to Deterministic Conversion**: Convert a non-deterministic automaton into a deterministic one that recognizes the same language.
@@ -66,6 +66,38 @@ To create an automaton that recognizes the intersection of two languages, use th
 
 ```csharp
 Automate intersectedAutomate = Automate.Intersection(automateA, automateB);
+```
+
+### 4. Union of Two Automatons
+
+```csharp
+var a = new Automate(
+    [
+        new State(0, isEntry: true, isExit: false),
+        new State(1, isEntry: false, isExit: true)
+    ],
+    [
+        new Transition(new State(0, true), new State(1, false, true), 'a'),
+        new Transition(new State(1, false, true), new State(0, true), 'b')
+    ],
+    [ 'a', 'b' ]
+);
+
+// Create second automaton
+var b = new Automate(
+    [
+        new State(0, isEntry: true, isExit: false),
+        new State(1, isEntry: false, isExit: true)
+    ],
+    [
+        new Transition(new State(0, true), new State(1, false, true), 'x'),
+        new Transition(new State(1, false, true), new State(0, true), 'y')
+    ],
+    [ 'x', 'y']
+);
+
+// Perform union
+var unionAutomate = Automate.Union(a, b);
 ```
 
 ## Contribution
