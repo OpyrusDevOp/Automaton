@@ -225,61 +225,61 @@ public class Automate
     
     
     public static Automate Union(Automate a, Automate b)
-{
-    var intersectingStates = new Dictionary<int, IntersecState>();
-    var id = 0;
-    var alphabet = a._alphabet.Union(b._alphabet).ToArray();
-    var transitions = new HashSet<Transition>();
-    var states = new List<State>();
-
-    foreach (var state in from aState in a._states.Values from bState in b._states.Values select new IntersecState
     {
-        Id = id,
-        AutoAState = aState,
-        AutoBState = bState,
-        IsEntry = aState.IsEntry || bState.IsEntry,
-        IsExit = aState.IsExit || bState.IsExit
-    })
-    {
-        intersectingStates.Add(id, state);
-        states.Add(State.FromIntersecState(state, id));
-        id++;
-    }
+        var intersectingStates = new Dictionary<int, IntersecState>();
+        var id = 0;
+        var alphabet = a._alphabet.Union(b._alphabet).ToArray();
+        var transitions = new HashSet<Transition>();
+        var states = new List<State>();
 
-    void AddTransition(IntersecState currentState, IntersecState comparedState)
-    {
-        var initialState = states.First(s => s.Id == currentState.Id);
-        var lastState = states.First(s => s.Id == comparedState.Id);
-
-        if (currentState.AutoAState.Id != comparedState.AutoAState.Id)
+        foreach (var state in from aState in a._states.Values from bState in b._states.Values select new IntersecState
         {
-            var aTransition = a._transitions.FirstOrDefault(t => t.InitialState == currentState.AutoAState && t.LastState == comparedState.AutoAState);
-            if (aTransition != null)
+            Id = id,
+            AutoAState = aState,
+            AutoBState = bState,
+            IsEntry = aState.IsEntry || bState.IsEntry,
+            IsExit = aState.IsExit || bState.IsExit
+        })
+        {
+            intersectingStates.Add(id, state);
+            states.Add(State.FromIntersecState(state, id));
+            id++;
+        }
+
+        void AddTransition(IntersecState currentState, IntersecState comparedState)
+        {
+            var initialState = states.First(s => s.Id == currentState.Id);
+            var lastState = states.First(s => s.Id == comparedState.Id);
+
+            if (currentState.AutoAState.Id != comparedState.AutoAState.Id)
             {
-                transitions.Add(new Transition(initialState, lastState, aTransition.Value));
+                var aTransition = a._transitions.FirstOrDefault(t => t.InitialState == currentState.AutoAState && t.LastState == comparedState.AutoAState);
+                if (aTransition != null)
+                {
+                    transitions.Add(new Transition(initialState, lastState, aTransition.Value));
+                }
+            }
+
+            if (currentState.AutoBState.Id != comparedState.AutoBState.Id)
+            {
+                var bTransition = b._transitions.FirstOrDefault(t => t.InitialState == currentState.AutoBState && t.LastState == comparedState.AutoBState);
+                if (bTransition != null)
+                {
+                    transitions.Add(new Transition(initialState, lastState, bTransition.Value));
+                }
             }
         }
 
-        if (currentState.AutoBState.Id != comparedState.AutoBState.Id)
+        for (var i = 0; i < intersectingStates.Count - 1; i++)
         {
-            var bTransition = b._transitions.FirstOrDefault(t => t.InitialState == currentState.AutoBState && t.LastState == comparedState.AutoBState);
-            if (bTransition != null)
+            for (var j = i + 1; j < intersectingStates.Count; j++)
             {
-                transitions.Add(new Transition(initialState, lastState, bTransition.Value));
+                AddTransition(intersectingStates[i], intersectingStates[j]);
             }
         }
-    }
 
-    for (var i = 0; i < intersectingStates.Count - 1; i++)
-    {
-        for (var j = i + 1; j < intersectingStates.Count; j++)
-        {
-            AddTransition(intersectingStates[i], intersectingStates[j]);
-        }
+        return new Automate(states.ToArray(), transitions.ToArray(), alphabet);
     }
-
-    return new Automate(states.ToArray(), transitions.ToArray(), alphabet);
-}
 
     
     #endregion
