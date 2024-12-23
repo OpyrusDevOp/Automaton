@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automaton", "Automaton.csproj", "{8B13261D-7556-468A-9164-093E990ABE5E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automaton", "Automaton\Automaton.csproj", "{8B13261D-7556-468A-9164-093E990ABE5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomatonTest", "AutomatonTest\AutomatonTest.csproj", "{32831DC9-C9D4-4A6C-96F9-1EACEFB0A5A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +20,9 @@ Global
 		{8B13261D-7556-468A-9164-093E990ABE5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B13261D-7556-468A-9164-093E990ABE5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B13261D-7556-468A-9164-093E990ABE5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32831DC9-C9D4-4A6C-96F9-1EACEFB0A5A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32831DC9-C9D4-4A6C-96F9-1EACEFB0A5A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32831DC9-C9D4-4A6C-96F9-1EACEFB0A5A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32831DC9-C9D4-4A6C-96F9-1EACEFB0A5A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
